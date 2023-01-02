@@ -67,7 +67,6 @@ public class Node : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void DecreaseValue()
     {
         --_value;
-
         _value = Mathf.Clamp(_value, 0, int.MaxValue);
         _ui.UpdateText(_value);
     }
