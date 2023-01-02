@@ -8,9 +8,9 @@ public class Node : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public static Action<Node> OnNodeChanged;
 
     [SerializeField] private UnitType _unit = UnitType.None;
+    [SerializeField] private GameObject _selectionCircle;
     [SerializeField] private int _value;
     [SerializeField] private int _increaseDelay = 1;
-    [SerializeField] private GameObject _selectionCircle;
 
     [Header("Linked Resources")]
     [SerializeField] private NodeUI _ui;
