@@ -9,6 +9,7 @@ public class Node : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     [SerializeField] private UnitType _unit = UnitType.None;
     [SerializeField] private int _value;
+    [SerializeField] private int _increaseDelay = 1;
     [SerializeField] private GameObject _selectionCircle;
 
     [Header("Linked Resources")]
@@ -16,6 +17,10 @@ public class Node : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private bool _entered;
     private bool _linked;
+
+    private const int ParityOffset = 1;
+    private const int ParityMinInitialValue = 2;
+    private const int ParityMinValue = 0;
 
     public UnitType Unit => _unit;
     public NodeUI UI => _ui;
@@ -42,7 +47,7 @@ public class Node : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         _value += GameState.Instance.GetIncreasePerSecond();
         _ui.UpdateText(_value);
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(_increaseDelay);
 
         StartCoroutine(InceaseValue());
     }
@@ -55,32 +60,30 @@ public class Node : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void IncreaseValue()
     {
-        _value += 1;
+        ++_value;
         _ui.UpdateText(_value);
     }
 
     public void DecreaseValue()
     {
-        _value -= 1;
-        _value = Mathf.Clamp(_value, 0, int.MaxValue);
+        --_value;
 
+        _value = Mathf.Clamp(_value, 0, int.MaxValue);
         _ui.UpdateText(_value);
     }
 
     public int GetDecreasedValueByTwo()
     {
-        int initialValue = _value;
-        int tempValue;
-
-        if (_value <= 1)
-            return 0;
-        else if(_value % 2 == 0)
-            tempValue = _value / 2;
+        if (_value < ParityMinInitialValue)
+            return ParityMinValue;
+        else if(GetParity(_value))
+            return DevideByTwo(_value);
         else
-            tempValue = ((initialValue - 1) / 2) + 1;
-
-        return tempValue;
+            return DevideByTwo(_value - ParityOffset) + ParityOffset;
     }
+
+    private bool GetParity(int value) => value % 2 == 0;
+    private int DevideByTwo(int value) => value / 2;
 
     public void ChangeUnitType(UnitType type)
     {
