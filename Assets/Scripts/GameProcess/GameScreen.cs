@@ -6,8 +6,7 @@ public class GameScreen
 {
     [SerializeField] private GameObject[] _activate;
     [SerializeField] private GameObject[] _deactivate;
-
-    private bool _showed = false;
+    [SerializeField] private bool _showed = false;
 
     public void ChangeState()
     {
