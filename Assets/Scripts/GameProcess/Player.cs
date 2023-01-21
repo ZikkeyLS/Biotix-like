@@ -15,7 +15,7 @@ public class Player : UnitBase
         Instance = this;
     }
 
-    protected void Update()
+    private void Update()
     {
         OnUpdate();
 

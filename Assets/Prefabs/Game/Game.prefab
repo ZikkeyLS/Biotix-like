@@ -1251,10 +1251,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7102931194593440859}
   - component: {fileID: 7102931194593440861}
+  - component: {fileID: 7611705728013355934}
   - component: {fileID: 7102931194593440860}
   - component: {fileID: 7709136363690018762}
   - component: {fileID: 4760705083636525097}
-  - component: {fileID: 7611705728013355934}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -1293,6 +1293,18 @@ MonoBehaviour:
   _type: 0
   _unit: {fileID: 8988717100229255869, guid: cfd764913604d0946b0fae117fd503a3, type: 3}
   _input: {fileID: 7611705728013355934}
+--- !u!114 &7611705728013355934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7102931194593440858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e3b0e56ea4bb074db42a68d7f8d7b6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7102931194593440860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1341,22 +1353,19 @@ MonoBehaviour:
   _level: 1
   _maxLevels: 5
   _menuName: LevelMenu
-  _winScreen: {fileID: 8692030523854455876}
-  _loseScreen: {fileID: 325042251474341022}
-  _pauseScreen: {fileID: 5578524232824745367}
-  _pauseButton: {fileID: 8955706835837499280}
---- !u!114 &7611705728013355934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7102931194593440858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e3b0e56ea4bb074db42a68d7f8d7b6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _win:
+    _activate:
+    - {fileID: 8692030523854455876}
+    _deactivate: []
+  _lose:
+    _activate:
+    - {fileID: 325042251474341022}
+    _deactivate: []
+  _pause:
+    _activate:
+    - {fileID: 5578524232824745367}
+    _deactivate:
+    - {fileID: 8955706835837499280}
 --- !u!1 &7609927359480444878
 GameObject:
   m_ObjectHideFlags: 0

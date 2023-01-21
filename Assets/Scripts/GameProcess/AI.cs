@@ -15,7 +15,7 @@ public class AI : UnitBase
         StartCoroutine(AnalizeSituation());
     }
 
-    protected void Update()
+    private void Update()
     {
         OnUpdate();
     }

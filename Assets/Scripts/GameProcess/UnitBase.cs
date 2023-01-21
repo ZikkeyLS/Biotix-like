@@ -66,6 +66,9 @@ public class UnitBase : MonoBehaviour
 
     private void DeleteUnit(TargetedPatricle patricle)
     {
+        Destroy(patricle.Unit.gameObject);
+        _units.Remove(patricle);
+
         if (patricle.Target.Unit == _type)
         {
             patricle.Target.IncreaseValue();
@@ -81,9 +84,5 @@ public class UnitBase : MonoBehaviour
 
             return;
         }
-
-
-        Destroy(patricle.Unit.gameObject);
-        _units.Remove(patricle);
     }
 }

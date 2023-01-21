@@ -7,21 +7,24 @@ public class Level : MonoBehaviour
     [SerializeField] private int _maxLevels = 5;
     [SerializeField] private string _menuName = "MainMenu";
 
-    [SerializeField] private GameObject _winScreen;
-    [SerializeField] private GameObject _loseScreen;
-    [SerializeField] private GameObject _pauseScreen;
-    [SerializeField] private GameObject _pauseButton;
+    [SerializeField] private GameScreen _win;
+    [SerializeField] private GameScreen _lose;
+    [SerializeField] private GameScreen _pause;
+
+    private const float InitialTimeScale = 1;
+    private const float PausedTimeScale = 0;
+    private const float NextLevelOffset = 1;
 
     public void Win()
     {
-        _winScreen.SetActive(true);
+        _win.ChangeState();
         PlayerData.Instance.TryAddLevel(_level);
         ReverseTimeScale();
     }
 
     public void Lose()
     {
-        _loseScreen.SetActive(true);
+        _lose.ChangeState();
         ReverseTimeScale();
     }
 
@@ -40,15 +43,13 @@ public class Level : MonoBehaviour
     public void PauseGame()
     {
         ReverseTimeScale();
-        _pauseButton.SetActive(false);
-        _pauseScreen.SetActive(true);
+        _pause.ChangeState();
     }
 
     public void ContinueGame()
     {
         ReverseTimeScale();
-        _pauseButton.SetActive(true);
-        _pauseScreen.SetActive(false);
+        _pause.ChangeState();
     }
 
     public void Next()
@@ -57,11 +58,11 @@ public class Level : MonoBehaviour
             return;
 
         ReverseTimeScale();
-        SceneManager.LoadScene($"Level{_level + 1}");
+        SceneManager.LoadScene($"Level{_level + NextLevelOffset}");
     }
 
     public void ReverseTimeScale()
     {
-        Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+        Time.timeScale = Time.timeScale == PausedTimeScale ? InitialTimeScale : PausedTimeScale;
     }
 }
