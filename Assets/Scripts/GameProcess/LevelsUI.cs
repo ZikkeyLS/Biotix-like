@@ -14,7 +14,7 @@ public class LevelsUI : MonoBehaviour
 
     private void CalculateLevelsUI()
     {
-        int levelsCompleted = PlayerData.Instance.LevelsCompleted;
+        int levelsCompleted = GameLoader.Instance.Data.LevelsCompleted;
 
         for (int i = 0; i < _levels.Length; i++)
             ProcessElement(i, levelsCompleted);

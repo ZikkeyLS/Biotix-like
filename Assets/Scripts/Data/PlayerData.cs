@@ -5,28 +5,14 @@ public class PlayerData : MonoBehaviour
     private int _levelsCompleted;
     public int LevelsCompleted => _levelsCompleted;
 
-    public static PlayerData Instance { get; private set; }
-
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(this);
-            GetCompletedLevels();
-            return;
-        }
-    }
-
     private void OnApplicationQuit()
     {
         SetCompletedLevels();
+    }
+
+    public void Initialize()
+    {
+        GetCompletedLevels();
     }
 
     private void SetCompletedLevels()

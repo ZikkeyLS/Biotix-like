@@ -18,7 +18,7 @@ public class Level : MonoBehaviour
     public void Win()
     {
         _win.ChangeState();
-        PlayerData.Instance.TryAddLevel(_level);
+        GameLoader.Instance.Data.TryAddLevel(_level);
         ReverseTimeScale();
     }
 
