@@ -75,10 +75,11 @@ public class Node : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (_value < ParityMinInitialValue)
             return ParityMinValue;
-        else if(GetParity(_value))
+
+        if(GetParity(_value))
             return DevideByTwo(_value);
-        else
-            return DevideByTwo(_value - ParityOffset) + ParityOffset;
+
+        return DevideByTwo(_value - ParityOffset) + ParityOffset;
     }
 
     private bool GetParity(int value) => value % 2 == 0;

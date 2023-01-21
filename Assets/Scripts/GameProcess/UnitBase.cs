@@ -69,13 +69,17 @@ public class UnitBase : MonoBehaviour
         if (patricle.Target.Unit == _type)
         {
             patricle.Target.IncreaseValue();
+            return;
         }
-        else
+        
+        if(patricle.Target.Unit != _type)
         {
             patricle.Target.DecreaseValue();
 
             if (patricle.Target.GetValue() <= 0)
                 patricle.Target.ChangeUnitType(_type);
+
+            return;
         }
 
 

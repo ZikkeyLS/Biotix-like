@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class Player : UnitBase
 {
-    public static Player Instance { get; private set; }
-
     [SerializeField] private PlayerInput _input;
 
     private bool _clicked = false;
     private List<Node> _selectedNodes = new();
+
+    public static Player Instance { get; private set; }
 
     private void Awake()
     {
@@ -22,8 +22,10 @@ public class Player : UnitBase
         if (_input.OnTouchBegan)
         {
             _clicked = true;
+            return;
         }
-        else if (_input.OnTouchExit)
+
+        if (_input.OnTouchExit)
         {
             Attack();
 
@@ -32,6 +34,7 @@ public class Player : UnitBase
 
             _selectedNodes.Clear();
             _clicked = false;
+            return;
         }
     }
 

@@ -5,7 +5,6 @@ public class NodeUI : MonoBehaviour
     [SerializeField] private SpriteRenderer _main;
     [SerializeField] private SpriteRenderer _selectionCircle;
     [SerializeField] private TMPro.TMP_Text _count;
-
     [SerializeField] private UnitPreset[] _presets;
 
     public Color GetColorByType(UnitType type)

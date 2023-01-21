@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class LevelsUI : MonoBehaviour
 {
     [SerializeField] private Button[] _levels;
-
     [SerializeField] private Sprite _lockedImage;
     [SerializeField] private Color _completedColor;
 
@@ -28,11 +27,14 @@ public class LevelsUI : MonoBehaviour
         if (i + 1 < levelsCompleted)
         {
             level.image.color = _completedColor;
+            return;
         }
-        else if (i > levelsCompleted)
+
+        if (i > levelsCompleted)
         {
             level.enabled = false;
             level.image.sprite = _lockedImage;
+            return;
         }
     }
 }

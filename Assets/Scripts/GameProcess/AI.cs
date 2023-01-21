@@ -30,7 +30,7 @@ public class AI : UnitBase
             halfSum += node.GetDecreasedValueByTwo();
 
         Node attackNode = GetAttackNode(halfSum);
-        Node defenceNode = GetDefenceNode(halfSum);
+        Node defenceNode = GetDefenceNode();
 
         if (defenceNode != null)
             foreach (Node node in _state.AINodes)
@@ -50,25 +50,26 @@ public class AI : UnitBase
 
         if (neutralNode == null)
             return playerNode;
-        else if (neutralNode != null)
+
+        if (neutralNode != null)
         {
             if (playerNode.GetValue() <= neutralNode.GetValue() && halfSum > playerNode.GetValue())
                 return playerNode;
-            else
-                return neutralNode;
+
+            return neutralNode;
         }
-        else
-            return null;
+
+        return null;
     }
 
-    private Node GetDefenceNode(int halfSum)
+    private Node GetDefenceNode()
     {
         Node defenceNode = GetMinimalNode(_state.AINodes);
 
         if (defenceNode.GetValue() < _helpMargin)
             return defenceNode;
-        else
-            return null;
+
+        return null;
     }
 
     private Node SortTypedNodes(List<Node> nodes, int halfSum)

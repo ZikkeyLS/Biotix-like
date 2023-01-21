@@ -5,13 +5,11 @@ public class Level : MonoBehaviour
 {
     [SerializeField] private int _level = 1;
     [SerializeField] private int _maxLevels = 5;
-
     [SerializeField] private string _menuName = "MainMenu";
 
     [SerializeField] private GameObject _winScreen;
     [SerializeField] private GameObject _loseScreen;
     [SerializeField] private GameObject _pauseScreen;
-
     [SerializeField] private GameObject _pauseButton;
 
     public void Win()
