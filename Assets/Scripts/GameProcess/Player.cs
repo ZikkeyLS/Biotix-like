@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MainUnit
+public class Player : UnitBase
 {
     public static Player Instance { get; private set; }
 
-    private bool _clicked = false;
+    [SerializeField] private PlayerInput _input;
 
+    private bool _clicked = false;
     private List<Node> _selectedNodes = new();
 
     private void Awake()
@@ -14,23 +15,19 @@ public class Player : MainUnit
         Instance = this;
     }
 
-    protected override void Update()
+    protected void Update()
     {
-        base.Update();
+        OnUpdate();
 
-        bool touchClickEnter = Input.touchCount != 0 && Input.touches[0].phase == TouchPhase.Began;
-        bool touchClickExit = Input.touchCount != 0 && Input.touches[0].phase == TouchPhase.Ended;
-
-        if (touchClickEnter || Input.GetMouseButtonDown(0))
+        if (_input.OnTouchBegan)
         {
             _clicked = true;
         }
-        
-        if(touchClickExit || Input.GetMouseButtonUp(0))
+        else if (_input.OnTouchExit)
         {
             Attack();
 
-            foreach(Node node in _selectedNodes)
+            foreach (Node node in _selectedNodes)
                 node.SetLinked(false);
 
             _selectedNodes.Clear();
@@ -49,14 +46,16 @@ public class Player : MainUnit
             if (node != lastNode && node.Unit == UnitType.Player)
                 AddUnits(node, lastNode);
     }
-    
+
     public void ProcessNode(Node node)
     {
-        if (!_clicked) 
+        if (!_clicked)
             return;
 
         if (_selectedNodes.Contains(node))
+        {
             _selectedNodes.Remove(node);
+        }
         else
         {
             _selectedNodes.Add(node);

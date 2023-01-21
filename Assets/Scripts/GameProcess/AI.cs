@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
-public class AI : MainUnit
+public class AI : UnitBase
 {
     [Header("AI")]
     [SerializeField] private GameState _state;
@@ -15,9 +15,9 @@ public class AI : MainUnit
         StartCoroutine(AnalizeSituation());
     }
 
-    protected override void Update()
+    protected void Update()
     {
-        base.Update();
+        OnUpdate();
     }
 
     private IEnumerator AnalizeSituation()
